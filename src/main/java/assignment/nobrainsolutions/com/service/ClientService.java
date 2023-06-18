@@ -1,6 +1,7 @@
 package assignment.nobrainsolutions.com.service;
 
 import assignment.nobrainsolutions.com.entity.Client;
+import assignment.nobrainsolutions.com.exception.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,23 +37,22 @@ public class ClientService {
      */
 
     public Client createClient(Client client) {
-        // Perform validation for ID number and mobile number
+
         if (!isSouthAfricanIdNumberValid(client.getIdNumber())) {
-            throw new IllegalArgumentException("Invalid South African ID Number");
+            throw new IllegalArgumentException(Constants.INVALID_ID_NUMBER);
         }
 
         if (isDuplicateIdNumber(client.getIdNumber())) {
-            throw new IllegalArgumentException("Duplicate ID Number");
+            throw new IllegalArgumentException(Constants.DUPLICATE_ID_NUMBER);
         }
 
         if (isDuplicateMobileNumber(client.getMobileNumber())) {
-            throw new IllegalArgumentException("Duplicate Mobile Number");
+            throw new IllegalArgumentException(Constants.DUPLICATE_MOBILE_NUMBER);
         }
 
         clients.add(client);
         return client;
     }
-
 
     /**
      * Retrieves a client by ID.
@@ -65,8 +65,9 @@ public class ClientService {
         return clients.stream()
                 .filter(c -> c.getIdNumber().equals(idNumber))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException(Constants.CLIENT_NOT_FOUND));
     }
+
 
 
     /**
@@ -83,15 +84,15 @@ public class ClientService {
         if (client != null) {
 
             if (!isSouthAfricanIdNumberValid(updatedClient.getIdNumber())) {
-                throw new IllegalArgumentException("Invalid South African ID Number");
+                throw new IllegalArgumentException(Constants.INVALID_ID_NUMBER);
             }
 
             if (client.getIdNumber().equals(updatedClient.getIdNumber()) && isDuplicateIdNumber(updatedClient.getIdNumber())) {
-                throw new IllegalArgumentException("Duplicate ID Number");
+                throw new IllegalArgumentException(Constants.DUPLICATE_ID_NUMBER);
             }
 
             if (client.getMobileNumber().equals(updatedClient.getMobileNumber()) && isDuplicateMobileNumber(updatedClient.getMobileNumber())) {
-                throw new IllegalArgumentException("Duplicate Mobile Number");
+                throw new IllegalArgumentException(Constants.DUPLICATE_MOBILE_NUMBER);
             }
 
             client.setFirstName(updatedClient.getFirstName());
@@ -120,24 +121,24 @@ public class ClientService {
             return clients.stream()
                     .filter(c -> c.getFirstName().equals(firstName))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
+                    .orElseThrow(() -> new IllegalArgumentException(Constants.CLIENT_NOT_FOUND));
         }
 
         if (idNumber != null) {
             return clients.stream()
                     .filter(c -> c.getIdNumber().equals(idNumber))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
+                    .orElseThrow(() -> new IllegalArgumentException(Constants.CLIENT_NOT_FOUND));
         }
 
         if (mobileNumber != null) {
             return clients.stream()
                     .filter(c -> c.getMobileNumber().equals(mobileNumber))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
+                    .orElseThrow(() -> new IllegalArgumentException(Constants.CLIENT_NOT_FOUND));
         }
 
-        throw new IllegalArgumentException("No search criteria provided");
+        throw new IllegalArgumentException(Constants.NO_SEARCH_CRITERIA_PROVIDED);
     }
 
     /**
