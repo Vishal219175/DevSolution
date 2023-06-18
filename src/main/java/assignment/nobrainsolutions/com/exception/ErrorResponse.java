@@ -1,4 +1,4 @@
-package com.example.DevSolution.exception;
+package assignment.nobrainsolutions.com.exception;
 
 import lombok.Getter;
 import lombok.Setter;

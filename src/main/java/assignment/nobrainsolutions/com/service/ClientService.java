@@ -1,7 +1,9 @@
-package com.example.DevSolution.service;
+package assignment.nobrainsolutions.com.service;
 
-import com.example.DevSolution.entity.Client;
+import assignment.nobrainsolutions.com.entity.Client;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +102,7 @@ public class ClientService {
 
             return client;
         } else {
-            throw new IllegalArgumentException("Client not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -150,7 +152,7 @@ public class ClientService {
         }
         char twelfthDigit = idNumber.charAt(11);
 
-        if (twelfthDigit != '8' || twelfthDigit != '9') {
+        if (twelfthDigit != '8' && twelfthDigit != '9') {
             return false;
         }
         return true;

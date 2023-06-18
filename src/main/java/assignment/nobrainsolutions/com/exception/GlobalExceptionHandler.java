@@ -1,4 +1,4 @@
-package com.example.DevSolution.exception;
+package assignment.nobrainsolutions.com.exception;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

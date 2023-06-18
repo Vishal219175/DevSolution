@@ -1,7 +1,7 @@
-package com.example.DevSolution.controller;
+package assignment.nobrainsolutions.com.controller;
 
-import com.example.DevSolution.entity.Client;
-import com.example.DevSolution.service.ClientService;
+import assignment.nobrainsolutions.com.entity.Client;
+import assignment.nobrainsolutions.com.service.ClientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

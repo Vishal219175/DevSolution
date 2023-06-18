@@ -1,4 +1,4 @@
-package com.example.DevSolution.entity;
+package assignment.nobrainsolutions.com.entity;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

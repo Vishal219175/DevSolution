@@ -1,6 +1,6 @@
-package com.example.DevSolution.service;
+package assignment.nobrainsolutions.com.service;
 
-import com.example.DevSolution.entity.Client;
+import assignment.nobrainsolutions.com.entity.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ public class ClientServiceTest {
     @Test
     void createClientTest() {
         // Arrange
-        Client client = new Client("Vishal", "Nagdev", "9284121655", "7878", "Pune");
+        Client client = new Client("Vishal", "Nagdev", "9284121655", "8001015009087", "Pune");
         // Act
         Client createdClient = clientService.createClient(client);
 
@@ -55,13 +55,13 @@ public class ClientServiceTest {
     @Test
     void updateClientTest() {
 
-        Client existingClient = new Client("Vishal", "Nagdev", "9284121655", "7878", "Pune");
+        Client existingClient = new Client("Vishal", "Nagdev", "9284121655", "8001015009087", "Pune");
         clients.add(existingClient);
 
         String updatedFirstName = "Vishal";
         String updatedLastName = "Nagdev";
         String updatedMobileNumber = "9284121650";
-        String updatedIdNumber = "7872";
+        String updatedIdNumber = "8001015009080";
         String updatedAddress = "South Africa";
         Client updatedClient = new Client(updatedFirstName, updatedLastName, updatedMobileNumber, updatedIdNumber, updatedAddress);
 

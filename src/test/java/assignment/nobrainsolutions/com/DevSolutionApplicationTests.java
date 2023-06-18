@@ -1,4 +1,4 @@
-package com.example.DevSolution;
+package assignment.nobrainsolutions.com;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
