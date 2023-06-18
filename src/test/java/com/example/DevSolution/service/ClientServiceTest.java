@@ -1,0 +1,101 @@
+package com.example.DevSolution.service;
+
+import com.example.DevSolution.entity.Client;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ *
+ * The ClientServiceTest class is responsible for testing the ClientService class.
+ * It contains test cases for creating, retrieving, updating, and searching clients.
+ */
+
+public class ClientServiceTest {
+
+    private ClientService clientService;
+    private List<Client> clients;
+
+    @BeforeEach
+    void setUp() {
+        clients = new ArrayList<>();
+        clientService = new ClientService(clients);
+    }
+
+    @Test
+    void createClientTest() {
+        // Arrange
+        Client client = new Client("Vishal", "Nagdev", "9284121655", "7878", "Pune");
+        // Act
+        Client createdClient = clientService.createClient(client);
+
+        // Assert
+        assertNotNull(createdClient);
+        assertEquals(client, createdClient);
+        assertEquals(1, clients.size());
+        assertTrue(clients.contains(client));
+    }
+
+    @Test
+    void getClientByIdTest() {
+
+        Client existingClient = new Client("Vishal", "Nagdev", "9284121655", "7878", "Pune");
+        clients.add(existingClient);
+
+        Client client = clientService.getClientById(existingClient.getIdNumber());
+
+        assertNotNull(client);
+        assertEquals(existingClient, client);
+    }
+
+    @Test
+    void updateClientTest() {
+
+        Client existingClient = new Client("Vishal", "Nagdev", "9284121655", "7878", "Pune");
+        clients.add(existingClient);
+
+        String updatedFirstName = "Vishal";
+        String updatedLastName = "Nagdev";
+        String updatedMobileNumber = "9284121650";
+        String updatedIdNumber = "7872";
+        String updatedAddress = "South Africa";
+        Client updatedClient = new Client(updatedFirstName, updatedLastName, updatedMobileNumber, updatedIdNumber, updatedAddress);
+
+        Client updated = clientService.updateClient(existingClient.getIdNumber(), updatedClient);
+
+        assertNotNull(updated);
+        assertEquals(existingClient, updated);
+        assertEquals(updatedFirstName, updated.getFirstName());
+        assertEquals(updatedLastName, updated.getLastName());
+        assertEquals(updatedMobileNumber, updated.getMobileNumber());
+        assertEquals(updatedIdNumber, updated.getIdNumber());
+        assertEquals(updatedAddress, updated.getPhysicalAddress());
+    }
+
+    @Test
+    void searchClientTest() {
+
+        Client client = new Client("Vishal", "Nagdev", "9284121655", "7878", "Pune");
+
+        String firstName = "Vishal";
+
+        clients.add(client);
+
+        Client result = clientService.searchClient(firstName, null, null);
+
+        assertNotNull(result);
+        assertEquals(client, result);
+        assertEquals(firstName, result.getFirstName());
+    }
+}
+
+
+
+
+
+
+
