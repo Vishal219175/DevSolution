@@ -120,21 +120,21 @@ public class ClientService {
             return clients.stream()
                     .filter(c -> c.getFirstName().equals(firstName))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Client with the given first name not found"));
+                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
         }
 
         if (idNumber != null) {
             return clients.stream()
                     .filter(c -> c.getIdNumber().equals(idNumber))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Client with the given ID number not found"));
+                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
         }
 
         if (mobileNumber != null) {
             return clients.stream()
                     .filter(c -> c.getMobileNumber().equals(mobileNumber))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Client with the given mobile number not found"));
+                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
         }
 
         throw new IllegalArgumentException("No search criteria provided");

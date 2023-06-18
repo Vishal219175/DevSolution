@@ -31,6 +31,15 @@ public class GlobalExceptionHandler {
             errorResponse.setMessage(ex.getMessage());
 
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        }
+        else if (ex.getMessage().equals("Client not found")) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+            errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
+            errorResponse.setError(HttpStatus.NOT_FOUND.getReasonPhrase());
+            errorResponse.setMessage(ex.getMessage());
+
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         } else {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
