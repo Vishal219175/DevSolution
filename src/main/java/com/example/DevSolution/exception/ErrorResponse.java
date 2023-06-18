@@ -2,6 +2,7 @@ package com.example.DevSolution.exception;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 
 /**
@@ -36,6 +37,5 @@ public class ErrorResponse {
      */
 
     private String message;
-
 
 }

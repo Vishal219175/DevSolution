@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * The ClientService class handles the business logic for managing clients.
+ * It provides methods for creating, retrieving, updating, and searching clients.
+ */
+
 @Service
 public class ClientService {
 
@@ -139,8 +145,12 @@ public class ClientService {
      * @return true if the ID number is valid, false otherwise.
      */
     private boolean isSouthAfricanIdNumberValid(String idNumber) {
-
         if (idNumber.length() != 13 || !idNumber.matches("\\d{13}")) {
+            return false;
+        }
+        char twelfthDigit = idNumber.charAt(11);
+
+        if (twelfthDigit != '8' || twelfthDigit != '9') {
             return false;
         }
         return true;

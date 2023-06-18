@@ -22,16 +22,26 @@ public class GlobalExceptionHandler {
      */
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(IllegalArgumentException ex) {
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
+        if (ex.getMessage().equals("Invalid South African ID Number")) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+            errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+            errorResponse.setError(HttpStatus.BAD_REQUEST.getReasonPhrase());
+            errorResponse.setMessage(ex.getMessage());
 
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
-        errorResponse.setError(HttpStatus.BAD_REQUEST.getReasonPhrase());
-        errorResponse.setMessage(ex.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        } else {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+            errorResponse.setStatus(HttpStatus.CONFLICT.value());
+            errorResponse.setError(HttpStatus.CONFLICT.getReasonPhrase());
+            errorResponse.setMessage(ex.getMessage());
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+        }
     }
+
 
     /**
      * Exception handler for ConstraintViolationException.
